@@ -1,0 +1,17 @@
+{
+  "name": "cz-bifrost-changelog",
+  "version": "1.0.0",
+  "description": "bifrost",
+  "author": "shangfei.SF",
+  "dependencies": {
+    "inquirer": "^6.2.0",
+    "inquirer-prompt-suggest": "^0.1.0",
+    "lodash.map": "^4.5.1",
+    "longest": "^1.0.1",
+    "right-pad": "^1.0.1",
+    "word-wrap": "^1.0.3"
+  },
+  "main": "index.js",
+  "repository": "shangfeiSF/cz-bifrost-changelog",
+  "license": "MIT"
+}
