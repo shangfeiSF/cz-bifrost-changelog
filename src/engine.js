@@ -205,7 +205,7 @@ module.exports = function () {
 
                     var footer = wrap(answers.footer, wrapOptions);
 
-                    commit(head + '\n\n' + bodyLine1 + (bodyLine2 ? ('\n' + bodyLine2) : '') + +'\n\n' + footer);
+                    commit(head + '\n\n' + bodyLine1 + (bodyLine2 ? ('\n' + bodyLine2) : '') + '\n\n' + footer);
                 });
         }
     };
