@@ -1,6 +1,6 @@
 var CONSTANTS = require('../constants');
 
-var TYPES = require('../types');
+var TYPES = require('../types').enumValues;
 
 module.exports.rules = {
     'type-case': [CONSTANTS.ERROR, CONSTANTS.ALWAYS, 'camel-case'],

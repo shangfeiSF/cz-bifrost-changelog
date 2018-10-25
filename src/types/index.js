@@ -1,4 +1,4 @@
-module.exports = {
+var enumValues = {
     feature: {
         description: "A new feature.",
         title: "Feature"
@@ -43,4 +43,10 @@ module.exports = {
         description: "Changes in compile process.",
         title: "Compile"
     }
-};
+}
+
+module.exports.enumValues = enumValues;
+
+module.exports.maxCharacters = Math.max.apply(Math, Object.keys(enumValues).map(function (vaulue) {
+    return vaulue.length
+}));

@@ -1,4 +1,4 @@
-module.exports = {
+var enumValues = {
     afd: {
         description: "Changes in [AFD Access Layer].",
         title: "Afd"
@@ -39,26 +39,6 @@ module.exports = {
         description: "Changes in [Templates] of [Data Generating Layer].",
         title: "Templates"
     },
-    cricus: {
-        description: "Changes in [Cricus].",
-        title: "Cricus"
-    },
-    cricusPb: {
-        description: "Changes in [CricusPb].",
-        title: "CricusPb"
-    },
-    cricusPb: {
-        description: "Changes in [CricusPb].",
-        title: "CricusPb"
-    },
-    lego: {
-        description: "Changes in [Lego].",
-        title: "Lego"
-    },
-    chaotic: {
-        description: "Changes in chaotic templates.",
-        title: "Chaotic"
-    },
     response: {
         description: "Changes in [Response Layer].",
         title: "Response"
@@ -71,20 +51,42 @@ module.exports = {
         description: "Changes in ./test",
         title: "Test"
     },
+    lego: {
+        description: "Changes in [Lego].",
+        title: "Lego"
+    },
+    cricus: {
+        description: "Changes in [Cricus].",
+        title: "Cricus"
+    },
+    cricusPb: {
+        description: "Changes in [CricusPb].",
+        title: "CricusPb"
+    },
+    chaotic: {
+        description: "Changes in chaotic templates.",
+        title: "Chaotic"
+    },
     bin: {
         description: "Changes about command in ./bin",
         title: "Bin"
     },
-    compile: {
-        description: "Affect compiled code.",
-        title: "Compile"
-    },
     fis: {
         description: "Changes in the config of fis.",
         title: "Fis"
+    },
+    compile: {
+        description: "Affect compiled code.",
+        title: "Compile"
     },
     ians: {
         description: "I am not sure the scope!",
         title: "I am not sure."
     }
 };
+
+module.exports.enumValues = enumValues;
+
+module.exports.maxCharacters = Math.max.apply(Math, Object.keys(enumValues).map(function (value) {
+    return value.length
+}));

@@ -1,6 +1,6 @@
 var CONSTANTS = require('../constants');
 
-var SCOPES = require('../scopes');
+var SCOPES = require('../scopes').enumValues;
 
 module.exports.rules = {
     'scope-case': [CONSTANTS.ERROR, CONSTANTS.ALWAYS, 'camel-case'],

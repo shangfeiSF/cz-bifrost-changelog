@@ -8,6 +8,7 @@ var bodyRules = require('./src/rules/body');
 var footerRules = require('./src/rules/footer');
 
 module.exports = engine();
+
 module.exports.rules = {
     header: headerRules,
     type: typeRules,

@@ -10,8 +10,8 @@ var subjectRules = require('./rules/subject');
 var bodyRules = require('./rules/body');
 var footerRules = require('./rules/footer');
 
-var TYPES = require('./types');
-var SCOPES = require('./scopes');
+var TYPES = require('./types').enumValues;
+var SCOPES = require('./scopes').enumValues;
 
 inquirer.registerPrompt('suggest', require('inquirer-prompt-suggest'));
 

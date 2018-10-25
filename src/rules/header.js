@@ -1,7 +1,10 @@
 var CONSTANTS = require('../constants');
 
+var scopeMaxCharacters = require('../scopes').maxCharacters;
+var typeMaxCharacters = require('../types').maxCharacters;
+
 var headerMinLength = 16;
-var headerMaxLength = 64;
+var headerMaxLength = 64 + scopeMaxCharacters + typeMaxCharacters;
 
 module.exports.headerMinLength = headerMinLength;
 module.exports.headerMaxLength = headerMaxLength;
