@@ -5,27 +5,34 @@ var map = require('lodash.map');
 var longest = require('longest');
 var inquirer = require('inquirer');
 var rightPad = require('right-pad');
+var commitizen = require('commitizen');
 
-var subjectRules = require('./rules/subject');
-var bodyRules = require('./rules/body');
-var footerRules = require('./rules/footer');
+var subjectRules = require('./rules/subject')();
+var bodyRules = require('./rules/body')();
+var footerRules = require('./rules/footer')();
 
-var TYPES = require('./types').enumValues;
-var SCOPES = require('./scopes').enumValues;
+var TYPES = require('./types');
+var SCOPES_MAP = require('./scopes');
 
 inquirer.registerPrompt('suggest', require('inquirer-prompt-suggest'));
 
 module.exports = function () {
-    var types_length = longest(Object.keys(TYPES)).length + 1;
-    var types = map(TYPES, function (item, key) {
+    var czConfig = commitizen.configLoader.load();
+
+    var SCOPES = czConfig.moduleName && czConfig.moduleName.length && SCOPES_MAP[czConfig.moduleName]
+        ? SCOPES_MAP[czConfig.moduleName]
+        : require('./scopes/common');
+
+    var types_length = longest(Object.keys(TYPES.enumValues)).length + 1;
+    var types = map(TYPES.enumValues, function (item, key) {
         return {
             name: rightPad(key + ':', types_length) + ' ' + item.description,
             value: key
         };
     });
 
-    var scopes_length = longest(Object.keys(TYPES)).length + 1;
-    var scopes = map(SCOPES, function (item, key) {
+    var scopes_length = longest(Object.keys(SCOPES.enumValues)).length + 1;
+    var scopes = map(SCOPES.enumValues, function (item, key) {
         return {
             name: rightPad(key + ':', scopes_length) + ' ' + item.description,
             value: key
@@ -165,6 +172,19 @@ module.exports = function () {
                         message: ['Provide the'.green, 'icafeId'.magenta, 'of the changes:\n'.green].join(' '),
                         suggestions: ['icafe: fc-native-tbrd-'],
                         validate: function (value) {
+                            var footerProbe = /^icafe\:\s([\n\r\s\S]+)$/g;
+                            var icafeIdProbe = /[\n\r\S]*(fc\-native\-tbrd\-\d+)[\n\r\S]*/g;
+
+                            var footerContent = footerProbe.exec(value);
+                            if (footerContent === null || footerContent.length !== 2) {
+                                return 'Footer format is `icafe: <...>`'.red;
+                            }
+
+                            var icafeId = icafeIdProbe.exec(footerContent[1]);
+                            if (icafeId === null || icafeId.length !== 2) {
+                                return 'No icafeId is forbidden！'.red;
+                            }
+
                             if (value.length < footerRules.footerMinLineLength) {
                                 return (
                                     'The footer is too short and current length is ' +
@@ -186,7 +206,7 @@ module.exports = function () {
                             }
 
                             return true;
-                        },
+                        }
                     }
                 ])
                 .then(function (answers) {

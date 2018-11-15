@@ -1,9 +1,18 @@
+var commitizen = require('commitizen');
+
 var CONSTANTS = require('../constants');
+var SCOPES_MAP = require('../scopes');
 
-var SCOPES = require('../scopes').enumValues;
+module.exports = function () {
+    var czConfig = commitizen.configLoader.load();
 
-module.exports.rules = {
-    'scope-case': [CONSTANTS.ERROR, CONSTANTS.ALWAYS, 'camel-case'],
-    'scope-empty': [CONSTANTS.ERROR, CONSTANTS.NEVER],
-    'scope-enum': [CONSTANTS.ERROR, CONSTANTS.ALWAYS, Object.keys(SCOPES)]
+    var SCOPES = czConfig.moduleName && czConfig.moduleName.length && SCOPES_MAP[czConfig.moduleName]
+        ? SCOPES_MAP[czConfig.moduleName]
+        : require('./scopes/common');
+
+    return {
+        'scope-case': [CONSTANTS.ERROR, CONSTANTS.ALWAYS, 'camel-case'],
+        'scope-empty': [CONSTANTS.ERROR, CONSTANTS.NEVER],
+        'scope-enum': [CONSTANTS.ERROR, CONSTANTS.ALWAYS, Object.keys(SCOPES.enumValues)]
+    }
 };

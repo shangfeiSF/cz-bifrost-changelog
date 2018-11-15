@@ -1,15 +1,25 @@
+var commitizen = require('commitizen');
+
 var CONSTANTS = require('../constants');
+var SCOPES_MAP = require('../scopes');
+var TYPES = require('../types');
 
-var scopeMaxCharacters = require('../scopes').maxCharacters;
-var typeMaxCharacters = require('../types').maxCharacters;
+module.exports = function () {
+    var czConfig = commitizen.configLoader.load();
 
-var headerMinLength = 16;
-var headerMaxLength = 64 + scopeMaxCharacters + typeMaxCharacters;
+    var SCOPES = czConfig.moduleName && czConfig.moduleName.length && SCOPES_MAP[czConfig.moduleName]
+        ? SCOPES_MAP[czConfig.moduleName]
+        : require('../scopes/common');
 
-module.exports.headerMinLength = headerMinLength;
-module.exports.headerMaxLength = headerMaxLength;
+    var headerMinLength = 16;
+    var headerMaxLength = 64 + SCOPES.maxCharacters + TYPES.maxCharacters;
 
-module.exports.rules = {
-    'header-min-length': [CONSTANTS.ERROR, CONSTANTS.ALWAYS, headerMinLength],
-    'header-max-length': [CONSTANTS.ERROR, CONSTANTS.ALWAYS, headerMaxLength]
+    return {
+        headerMinLength: headerMinLength,
+        headerMaxLength: headerMaxLength,
+        rules: {
+            'header-min-length': [CONSTANTS.ERROR, CONSTANTS.ALWAYS, headerMinLength],
+            'header-max-length': [CONSTANTS.ERROR, CONSTANTS.ALWAYS, headerMaxLength]
+        }
+    };
 };

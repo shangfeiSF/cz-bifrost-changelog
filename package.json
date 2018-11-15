@@ -1,9 +1,10 @@
 {
   "name": "cz-bifrost-changelog",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "bifrost",
   "author": "shangfei.SF",
   "dependencies": {
+    "commitizen": "^3.0.4",
     "inquirer": "^6.2.0",
     "inquirer-prompt-suggest": "^0.1.0",
     "lodash.map": "^4.5.1",

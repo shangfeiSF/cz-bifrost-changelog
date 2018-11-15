@@ -31,6 +31,10 @@ var enumValues = {
         description: "Revert the previous code.",
         title: "Revert"
     },
+    merge: {
+        description: "Merge the code.",
+        title: "Merge"
+    },
     test: {
         description: "Add test or make a test.",
         title: "Test"
@@ -43,7 +47,7 @@ var enumValues = {
         description: "Changes in compile process.",
         title: "Compile"
     }
-}
+};
 
 module.exports.enumValues = enumValues;
 
