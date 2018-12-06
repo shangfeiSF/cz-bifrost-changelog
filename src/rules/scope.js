@@ -8,7 +8,7 @@ module.exports = function () {
 
     var SCOPES = czConfig.moduleName && czConfig.moduleName.length && SCOPES_MAP[czConfig.moduleName]
         ? SCOPES_MAP[czConfig.moduleName]
-        : require('./scopes/common');
+        : require('../scopes/common');
 
     return {
         'scope-case': [CONSTANTS.ERROR, CONSTANTS.ALWAYS, 'camel-case'],
